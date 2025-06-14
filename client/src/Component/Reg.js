@@ -7,7 +7,7 @@ function RegisterPage() {
   const handleRegister = (e) => {
     e.preventDefault(); //will not submit without the values
     // Add registration logic here
-    axios.post("http://localhost:3001/register", {name, mail, pass})
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {name, mail, pass})
     .then(result=>{
         if(result.status===201){
             console.log("User created successfully");

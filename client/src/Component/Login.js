@@ -11,7 +11,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/login", { mail, pass });
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { mail, pass });
       if (res.status === 200) {
         alert("Login successful");
         navigate("/product");

@@ -29,7 +29,7 @@ function Billing() {
     formData.append('quantity', quantity);
 
     try {
-      await axios.post('http://localhost:3001/add-product', formData, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/add-product`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -71,7 +71,7 @@ function Billing() {
   // click finish
   const handleFinish = async () => {
     try {
-      await axios.put("http://localhost:3001/update-quantities", {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/update-quantities`, {
         items: billItems.map(({ _id, quantity }) => ({ _id, quantity }))
       });
       alert("Bill submitted!");
@@ -84,7 +84,7 @@ function Billing() {
 
   //fetchProducts
     const fetchProducts = async () => {
-    const res = await axios.get('http://localhost:3001/products');
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
     setProducts(res.data);
   };
     useEffect(() => {
@@ -318,7 +318,7 @@ const handlePrint = () => {
                     <TableCell className="py-1">{prod.name}</TableCell>
                     <TableCell className="py-1">
                       <img 
-                        src={`http://localhost:3001/${prod.image}`} 
+                        src={`${process.env.REACT_APP_BACKEND_URL}/${prod.image}`} 
                         alt={prod.name} 
                         width="40" 
                         className="rounded shadow-sm border" 

@@ -16,7 +16,7 @@ const Product = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/products");
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
       setProducts(res.data);
     } catch (err) {
       console.error("Failed to fetch products", err);
@@ -25,7 +25,7 @@ const Product = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/products/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error("Delete failed", err);
@@ -47,7 +47,7 @@ const Product = () => {
 
   const handleEditSubmit = async () => {
     try {
-      await axios.put(`http://localhost:3001/products/${editProduct._id}`, editProduct);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/products/${editProduct._id}`, editProduct);
       fetchProducts();
       handleEditClose();
     } catch (err) {
@@ -81,7 +81,7 @@ const Product = () => {
                 <TableCell>{product.name}</TableCell>
                 <TableCell>
                   <img
-                    src={`http://localhost:3001/${product.image}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${product.image}`}
                     alt={product.name}
                     className="w-14 h-14 object-cover rounded border"
                   />
