@@ -15,12 +15,19 @@ app.use(express.json());
 //For stored image
 app.use("/uploads", express.static("uploads")); // Serve files
 
-app.use(cors())
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 //mongo DB connection code
 mongoose.connect(process.env.MONGO_URL)
     .then(()=>console.log("Connected to mongo DB"))
     .catch(err => console.log("Fail to connect", err));
+
+// ✅ Add this before app.listen()
+const PORT = process.env.PORT || 3001;
     
 app.listen(process.env.PORT,() =>{
     console.log(`server is running on port ${process.env.PORT}`)
@@ -102,18 +109,7 @@ app.post("/add-product", upload.single("file"), async (req, res) => {
 });
 
 
-// Upload & Save product
-app.post("/add-product", upload.single("file"), async (req, res) => {
-  try {
-    const { name, price, quantity } = req.body;
-    const imagePath = req.file ? req.file.path : null;
-    const newProduct = new ProductModel({ name, price, quantity, image: imagePath });
-    await newProduct.save();
-    res.status(201).json(newProduct);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+
 
 // Fetch all products
 app.get("/products", async (req, res) => {
@@ -160,6 +156,10 @@ app.delete("/products/:id", async (req, res) => {
   }
 });
 
+
+app.get("/", (req, res) => {
+  res.send("MERN Billing Backend Running ✅");
+});
 
 
 
