@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve files
 
 app.use(cors({
-  origin: "https://mern-billing-red.vercel.app", // Frontend
+  origin: "https://mern-billing-iu0uixoug-celciya-effrins-projects.vercel.app", // Frontend
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
