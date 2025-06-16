@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve files
 
 app.use(cors({
-  origin: "http://localhost:3000", // Frontend
+  origin: "https://mern-billing-red.vercel.app", // Frontend
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -31,12 +31,10 @@ mongoose.connect(process.env.MONGO_URL)
     .then(()=>console.log("Connected to mongo DB"))
     .catch(err => console.log("Fail to connect", err));
     
-// ✅ Start server
-const PORT = process.env.PORT || 3001;
+app.listen(process.env.PORT,() =>{
+    console.log(`server is running on port ${process.env.REACT_APP_FRONTEND_URL}`)
+})
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
