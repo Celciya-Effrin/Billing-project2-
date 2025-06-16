@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve files
 
 app.use(cors({
-  origin: "http://localhost:3000", // Frontend
+  origin: "https://billing-project2-mern1.onrender.com", // Frontend
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
